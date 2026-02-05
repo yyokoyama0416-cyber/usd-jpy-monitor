@@ -81,4 +81,3 @@ while True:
         print("エラー:", e)
 
     time.sleep(CHECK_INTERVAL)
-
