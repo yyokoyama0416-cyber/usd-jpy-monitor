@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 GMAIL = os.environ["GMAIL"]
 APP_PASS = os.environ["APP_PASS"]
 TO_MAIL = os.environ["TO_MAIL"]
-RESEND_API_KEY = environ["RESEND_API_KEY"]
+RESEND_API_KEY = os.environ["RESEND_API_KEY"]
 
 # ===== Web設定 =====
 URL = "https://jp.investing.com/currencies/usd-jpy-technical"
@@ -87,4 +87,5 @@ while True:
         print("エラー:", e)
 
     time.sleep(CHECK_INTERVAL)
+
 
