@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 GMAIL = os.environ["GMAIL"]
 APP_PASS = os.environ["APP_PASS"]
 TO_MAIL = os.environ["TO_MAIL"]
+RESEND_API_KEY = environ["RESEND_API_KEY"]
 
 # ===== Web設定 =====
 URL = "https://jp.investing.com/currencies/usd-jpy-technical"
@@ -42,14 +43,19 @@ def get_summary():
 
 # ===== メール送信 =====
 def send_mail(text):
-    msg = MIMEText(text)
-    msg["Subject"] = "USDJPYテクニカル変化"
-    msg["From"] = GMAIL
-    msg["To"] = TO_MAIL
-
-    with smtplib.SMTP_SSL("smtp.gmail.com",587) as smtp:
-        smtp.login(GMAIL,APP_PASS)
-        smtp.send_message(msg)
+    requests.post(
+        "https://api.resend.com/emails",
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "from": "onboarding@resend.dev",
+            "to": [TO_MAIL],
+            "subject": "USDJPYテクニカル変化",
+            "text": text,
+        },
+    )
 
 # ===== メール整形 =====
 def format_summary_email(last, current):
@@ -81,3 +87,4 @@ while True:
         print("エラー:", e)
 
     time.sleep(CHECK_INTERVAL)
+
