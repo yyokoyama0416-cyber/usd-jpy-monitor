@@ -47,7 +47,7 @@ def send_mail(text):
     msg["From"] = GMAIL
     msg["To"] = TO_MAIL
 
-    with smtplib.SMTP_SSL("smtp.gmail.com",465) as smtp:
+    with smtplib.SMTP_SSL("smtp.gmail.com",587) as smtp:
         smtp.login(GMAIL,APP_PASS)
         smtp.send_message(msg)
 
@@ -81,3 +81,4 @@ while True:
         print("エラー:", e)
 
     time.sleep(CHECK_INTERVAL)
+
