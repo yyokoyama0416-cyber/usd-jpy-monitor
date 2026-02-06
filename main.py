@@ -19,7 +19,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0"}
 wanted_signals = ["強い買い", "買い", "中立", "売り", "強い売り"]
 
 # ===== 環境設定 =====
-CHECK_INTERVAL = os.environ["CHECK_INTERVAL"]
+CHECK_INTERVAL = int(os.environ["CHECK_INTERVAL"])
 last_summary = None
 
 
@@ -98,6 +98,7 @@ while True:
         print("エラー:", e)
 
     time.sleep(CHECK_INTERVAL)
+
 
 
 
